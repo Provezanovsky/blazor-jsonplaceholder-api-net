@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    background: #f4f7fb;
+    color: #172b4d;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+main {
+    max-width: 720px;
+    margin: 64px auto;
+    padding: 24px;
+}
+
+h1 {
+    line-height: 1.2;
+}
+
+.user-card {
+    margin: 24px 0;
+    padding: 24px;
+    background: white;
+    border: 1px solid #dbe3ee;
+    border-radius: 12px;
+}
+
+button {
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 8px;
+    background: #2256c7;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+#blazor-error-ui {
+    display: none;
+    padding: 16px;
+    background: #fff1cc;
+}

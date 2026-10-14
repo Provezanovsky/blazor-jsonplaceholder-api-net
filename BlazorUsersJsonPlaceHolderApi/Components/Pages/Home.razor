@@ -1,0 +1,77 @@
+@page "/"
+@rendermode InteractiveServer
+@inject UserService UserService
+
+<PageTitle>Usuários | JSONPlaceholder</PageTitle>
+
+<h1>Primeiro usuário da API</h1>
+<p>Consulta à lista de usuários do JSONPlaceholder.</p>
+
+@if (isLoading)
+{
+    <p role="status">Carregando usuário...</p>
+}
+else if (errorMessage is not null)
+{
+    <p role="alert">@errorMessage</p>
+}
+else if (firstUser is not null)
+{
+    <section class="user-card" aria-label="Dados do primeiro usuário">
+        <p><strong>Nome:</strong> @firstUser.Name</p>
+        <p><strong>Cidade:</strong> @firstUser.Address.City</p>
+        <p><strong>Empresa:</strong> @firstUser.Company.Name</p>
+    </section>
+    <p>Os dados também foram impressos no console do servidor.</p>
+}
+else
+{
+    <p>A API retornou uma lista vazia.</p>
+}
+
+<button @onclick="LoadUserAsync" disabled="@isLoading">Consultar novamente</button>
+
+@code {
+    private User? firstUser;
+    private bool isLoading = true;
+    private string? errorMessage;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // Executa após ativar a interatividade, evitando uma consulta duplicada
+        // durante a pré-renderização e a inicialização do componente.
+        if (firstRender)
+        {
+            await LoadUserAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadUserAsync()
+    {
+        isLoading = true;
+        errorMessage = null;
+        firstUser = null;
+
+        try
+        {
+            firstUser = await UserService.GetFirstUserAsync();
+        }
+        catch (HttpRequestException)
+        {
+            errorMessage = "Não foi possível consultar a API. Tente novamente.";
+        }
+        catch (TaskCanceledException)
+        {
+            errorMessage = "A consulta demorou demais. Tente novamente.";
+        }
+        catch (System.Text.Json.JsonException)
+        {
+            errorMessage = "A API retornou dados em um formato inválido.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}
