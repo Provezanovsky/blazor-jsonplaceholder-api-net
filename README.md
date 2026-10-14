@@ -2,7 +2,7 @@
 
 Atividade em C# / .NET 8 com Blazor e interatividade no servidor.
 
-## Requisitos atendidos
+## O que faz
 
 - Consome `https://jsonplaceholder.typicode.com/users` com `HttpClient`.
 - Desserializa a resposta como uma lista de usuários.
@@ -28,9 +28,7 @@ Cidade: Gwenborough
 Empresa: Romaguera-Crona
 ```
 
-É necessário acesso à internet para consultar a API. O botão **Consultar novamente** repete a consulta e a impressão.
-
-No Visual Studio 2022 com suporte ao .NET 8 e a carga de trabalho ASP.NET, abra o arquivo `BlazorUsersJsonPlaceHolderApi/BlazorUsersJsonPlaceHolderApi.csproj` e execute o perfil `http`.
+No IDE, com suporte ao .NET 8 e a carga de trabalho ASP.NET, abra o arquivo `BlazorUsersJsonPlaceHolderApi/BlazorUsersJsonPlaceHolderApi.csproj` e execute o perfil `http`.
 
 ## Organização
 
